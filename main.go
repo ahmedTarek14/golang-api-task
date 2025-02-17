@@ -22,6 +22,9 @@ func main() {
 	r.HandleFunc("/api/user/register", RegisterUser).Methods("POST")
 	r.HandleFunc("/api/user/login", LoginUser).Methods("POST")
 
+	r.HandleFunc("/api/user/add-credit-card", AuthMiddleware(AddCreditCard)).Methods("POST")
+	r.HandleFunc("/api/user/delete-credit-card", AuthMiddleware(DeleteCreditCard)).Methods("DELETE")
+
 	// Print registered routes
 	r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
 		path, err := route.GetPathTemplate()
