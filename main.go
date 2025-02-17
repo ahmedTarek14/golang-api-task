@@ -25,14 +25,16 @@ func main() {
 	r.HandleFunc("/api/user/add-credit-card", AuthMiddleware(AddCreditCard)).Methods("POST")
 	r.HandleFunc("/api/user/delete-credit-card", AuthMiddleware(DeleteCreditCard)).Methods("DELETE")
 
-	// Print registered routes
-	r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
-		path, err := route.GetPathTemplate()
-		if err == nil {
-			fmt.Println("✅ Registered Route:", path)
-		}
-		return nil
-	})
+	r.HandleFunc("/api/user/products", ListProducts).Methods("GET")
+
+	/* Print registered routes for test */
+	// r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
+	// 	path, err := route.GetPathTemplate()
+	// 	if err == nil {
+	// 		fmt.Println("✅ Registered Route:", path)
+	// 	}
+	// 	return nil
+	// })
 
 	// Start the server
 	fmt.Println("🚀 Server is running on port 8080...")

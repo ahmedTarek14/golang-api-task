@@ -28,7 +28,7 @@ func connectDB() {
 	fmt.Println("Database connection successful! ✅")
 }
 
-// CreateTables - إنشاء الجداول
+// CreateTables
 func CreateTables() {
 	query := `
 	CREATE TABLE IF NOT EXISTS users (
@@ -44,6 +44,15 @@ func CreateTables() {
 		name VARCHAR(255) NOT NULL,
 		description TEXT,
 		price DECIMAL(10,2) NOT NULL,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+
+	CREATE TABLE credit_cards (
+		id SERIAL PRIMARY KEY,
+		user_id INT REFERENCES users(id) ON DELETE CASCADE,
+		card_number TEXT NOT NULL,
+		expiry_date TEXT NOT NULL,
+		cvv TEXT NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);
 	`
