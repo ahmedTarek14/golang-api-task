@@ -44,8 +44,8 @@ go build -o app.exe .
 |------------------------|--------|---------------------------|---------------|
 | `/api/user/register`   | POST   | Register a new user       | ❌ No         |
 | `/api/user/login`      | POST   | Login user & get token    | ❌ No         |
-| `/api/credit-card/add` | POST   | Add a new credit card     | ✅ Yes        |
-| `/api/credit-card/delete` | DELETE | Delete a credit card | ✅ Yes        |
+| `/api/user/credit-card/add` | POST   | Add a new credit card     | ✅ Yes        |
+| `/api/user/credit-card/delete` | DELETE | Delete a credit card | ✅ Yes        |
 
 ## 📌 Next Steps
 - Implement product management (Create, Update, Delete)
