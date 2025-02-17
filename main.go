@@ -27,6 +27,8 @@ func main() {
 
 	r.HandleFunc("/api/user/products", ListProducts).Methods("GET")
 
+	r.HandleFunc("/api/user/products/buy", AuthMiddleware(BuyProducts)).Methods("POST")
+
 	/* Print registered routes for test */
 	// r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
 	// 	path, err := route.GetPathTemplate()

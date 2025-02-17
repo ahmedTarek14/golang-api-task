@@ -55,6 +55,14 @@ func CreateTables() {
 		cvv TEXT NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);
+
+	CREATE TABLE purchases (
+		id SERIAL PRIMARY KEY,
+		user_id INT REFERENCES users(id) ON DELETE CASCADE,
+		product_id INT REFERENCES products(id) ON DELETE CASCADE,
+		purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+
 	`
 
 	_, err := db.Exec(context.Background(), query)
