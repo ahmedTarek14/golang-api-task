@@ -16,16 +16,22 @@ func main() {
 
 	// Setting up the Router
 	r := mux.NewRouter()
-	// 🛠️ تعريف الـ API Endpoints
-	r.HandleFunc("/api/register", RegisterUser).Methods("POST")
-	r.HandleFunc("/api/login", LoginUser).Methods("POST")
 
-	
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "🚀 Server is running!")
+
+	// 🛠️ Define API Endpoints
+	r.HandleFunc("/api/user/register", RegisterUser).Methods("POST")
+	r.HandleFunc("/api/user/login", LoginUser).Methods("POST")
+
+	// Print registered routes
+	r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
+		path, err := route.GetPathTemplate()
+		if err == nil {
+			fmt.Println("✅ Registered Route:", path)
+		}
+		return nil
 	})
 
-	// تشغيل السيرفر
+	// Start the server
 	fmt.Println("🚀 Server is running on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
